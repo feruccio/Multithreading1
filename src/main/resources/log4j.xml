@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+    <appender name="A_CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="TRACE"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <appender name="A_CONSOLE_ERROR" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.err"/>
+        <param name="Encoding" value="cp1251"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} [%5p] %m at %l%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ERROR"/>
+            <param name="LevelMax" value="OFF"/>
+        </filter>
+    </appender>
+
+    <logger name="com.haurylenka" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="A_CONSOLE"/>
+        <appender-ref ref="A_CONSOLE_ERROR"/>
+    </logger>
+
+    <root>
+        <priority value="WARN"/>
+        <appender-ref ref="A_CONSOLE_ERROR"/>
+        <appender-ref ref="A_CONSOLE"/>
+    </root>
+
+</log4j:configuration>
